@@ -4,10 +4,8 @@ output:  html_document
 ---
 
 # Introduction
-***
 
 ## Examples
-***
 Wish to analyze data in which response is a “direction”:
 
 - 2d directional data are called *circular* data
@@ -16,7 +14,6 @@ Wish to analyze data in which response is a “direction”:
 - “directional” data may also arise in higher dimensions
 
 ## Wind Directions
-***
 - Recorded at Col de la Roa, Italian Alps
 - n = 310 (first 40 listed below)
 - Radians, clockwise from north
@@ -43,7 +40,6 @@ ticks.circular(circular(seq(0, (15/8)*pi, pi/8)), zero=pi/2, rotation="clock", t
 ```
 
 ## Arrival Times at an ICU
-***
 + 24-hour clock times (format `hrs.mins`)
 + n = 254 (first 32 listed below)
 + Source: Cox & Lewis (1966); also Fisher (1993) and R package `circular`
@@ -53,18 +49,17 @@ ticks.circular(circular(seq(0, (15/8)*pi, pi/8)), zero=pi/2, rotation="clock", t
 ## Plot
 
 ## Primate Vertebrae
-***
 * Orientation of left superior facet of last lumbar vertebra in humans, gorillas, and chimpanzees
 * Source: Keifer (2005 UF Anthropology MA Thesis)
 
 ![human vertabrae](https://upload.wikimedia.org/wikipedia/commons/c/c8/Gray93.png)
 
 ## Plot of Human Data
-***
+
 ![vertabrae on sphere](https://github.com/presnell/DirectionalDataSlides/blob/master/Pictures/vertebraeOnSphere.png?raw=true)
 
 ## Butterfly Migrations
-***
+
 * Direction of travel observed for 2649 migrating butterflies in Florida
 * Source: Thomas J Walker, University of Florida, Dept of Entomology and Nematology
 * Other variables:
@@ -80,16 +75,16 @@ ticks.circular(circular(seq(0, (15/8)*pi, pi/8)), zero=pi/2, rotation="clock", t
   
 
 ## Why is the Analysis of Directional Data Different?
-***
+
 * First three observations from the wind directions data: ``r paste(round(wind[1:3], 2), collapse=", ")``
 
 * The mean of these three numbers is ``r round(mean(wind[1:3]), 2)``
 * What do you think?
 
 # Graphical Display of Directional Data
-***
+
 ## Graphical Display of Circular Data (in R)
-***
+
 * Have already seen simple dot plots for circular data, e.g., for the wind data:
 ```{r, echo=FALSE}
 require(circular)
@@ -103,7 +98,7 @@ ticks.circular(circular(seq(0, (15/8)*pi, pi/8)), zero=pi/2, rotation="clock", t
 ```
 
 ## Graphical Display of Circular Data (in R) (ctd)
-***
+
 - and for the ICU data:
 ```{r, eval=FALSE}
 ## Note that pch=17 does not work properly here.
@@ -113,7 +108,7 @@ plot(fisherB1c, cex=1.5, axes=TRUE, bin=360, stack=TRUE, sep=0.035, shrink=1.3)
 - and one more …
 
 ## Graphical Display of Circular Data (in R) (ctd)
-***
+
 ```{r, eval=FALSE}
 par(mar=c(0,0,0,0)+0.1, oma=c(0,0,0,0)+0.1)
 plot(fisherB10c$set1, units="degrees", zero=pi/2,
@@ -129,12 +124,12 @@ points(fisherB10c$set3, zero=pi/2,
 ```
 
 ## Circular Histograms
-***
+
 - [Circular histograms](https://www.google.com/search?q=R+circular+histogram)
 exist (see Fisher and Mardia and Jupp) but is there a ready-made function in R?
 
 ## Rose Diagrams 
-***
+
 - Invented by [Florence Nightingale](https://en.wikipedia.org/wiki/Florence_Nightingale) (elected first female member of the Royals Statistical Society in 1859; honorary member of ASA)
 - [Nightingale's rose in R](https://github.com/jennybc/r-graph-catalog/tree/master/figures/fig05-14_nightingale-data) (see also [this post](http://www.r-bloggers.com/going-beyond-florence-nightingales-data-diagram-did-flo-blow-it-with-wedges/) and the [R graph catalog](http://shiny.stat.ubc.ca/r-graph-catalog/))
 - Note that radii of segments are proportional to square root of the frequencies (counts), so that areas are proportional to frequencies. Is this the right thing to do?
@@ -143,14 +138,14 @@ exist (see Fisher and Mardia and Jupp) but is there a ready-made function in R?
     + the choice of starting point for the bins
 
 ## Adding a Rose Diagram to the Plot of Wind Directions
-***
+
 ```{r eval=FALSE}
 rose.diag(windc, bins=16, col="darkgrey",
           cex=1.5, prop=1.35, add=TRUE)
 ```
 
 ## Adding a Rose Diagram to the Plot of Wind Directions
-***
+
 ```{r echo=FALSE}
 par(mar=c(0,0,0,0)+0.1, oma=c(0,0,0,0)+0.1) 
 plot(windc, axes=FALSE, bin=360, stack=TRUE, sep=0.035, shrink=1.3)
@@ -162,7 +157,7 @@ rose.diag(windc, bins=16, col="darkgrey",
 ```
 
 ## Changing the Binwidth
-***
+
 ### Fewer/Wider Bins
 
 ```{r echo=FALSE}
@@ -188,14 +183,14 @@ rose.diag(windc, bins=32, col="darkgrey",
 ```
 
 ## Changing the Radii
-***
+
 - I think that the default “radii proportional to counts” is generally best, but this is not always obvious. The scale certainly makes a big difference however.
 ```{r eval=FALSE}
 rose.diag(windc, bins=16, col="darkgrey", radii.scale="linear", cex=1.5, prop=2.4, add=TRUE)
 ```
 
 ## Changing the Radii
-***
+
 ```{r echo=FALSE}
 par(mar=c(0,0,0,0)+0.1, oma=c(0,0,0,0)+0.1) 
 plot(windc, axes=FALSE, bin=360, stack=TRUE, sep=0.035, shrink=1.3)
@@ -206,13 +201,13 @@ rose.diag(windc, bins=16, col="darkgrey", radii.scale="linear", cex=1.5, prop=2.
 ```
 
 ## Kernel Density Estimates
-***
+
 ```{r eval=FALSE}
 lines(density.circular(windc, bw=40), lwd=2, lty=1)
 ```
 
 ## Kernel Density Estimates
-***
+
 ```{r echo=FALSE, fig.height=8}
 par(mar=c(0,0,0,0)+0.1, oma=c(0,0,0,0)+0.1) 
 plot(windc, axes=FALSE, bin=360, stack=TRUE, sep=0.035, shrink=1.8)
@@ -225,14 +220,14 @@ lines(density.circular(windc, bw=40), lwd=2, lty=1)
 ```
 
 ## Spherical Data
-***
+
 - Are there any canned routines for plotting spherical data in R?
 
 # Basic Summary Statistics
-***
+
 
 ## Mean Direction and Mean Resultant Length
-***
+
 - First three observations from the wind directions data:
 
 ```{r kable, echo=FALSE, message=FALSE}
@@ -260,7 +255,7 @@ MDir <- Mean/Rbar
 - $\tilde{\theta} =$ ``r round(asin(MDir[1]), 3)``
 
 ## Plot
-***
+
 ```{r echo=FALSE}
 par(mar=c(0,0,0,0)+0.1, oma=c(0,0,0,0)+0.1)
 plot(windc[1:3], cex=2, lwd=1.5, axes=TRUE, ticks=TRUE, tcl=0.05)
@@ -269,9 +264,9 @@ points(circular(asin(MDir[1]), units="radians", template="geographics"),
 ```
 
 # Aside: Generating from the Uniform Distribution on the Sphere
-***
+
 ## Generating Random Points on the Sphere
-***
+
 - Wish to generate a random “direction” in d-dimensions; i.e., an observation from the uniform distribution in the $d-1$ sphere.
 - Usual way: let $X ∼ N_d(0, I)$ and return $U = X/||X||$.
 - An alternative rejection sampler:
@@ -295,7 +290,7 @@ print(ar)
 ```
 
 ## Code for Timing Results
-***
+
 ```{r }
 runifSphere <- function(n, dimension, method=c("norm", "cube", "slownorm")) {
     method <- match.arg(method)
@@ -326,26 +321,26 @@ runifSphere <- function(n, dimension, method=c("norm", "cube", "slownorm")) {
 ```
 
 ## Easy fix for Borel’s paradox in 3-d
-***
+
 Take longitude $\phi \sim U(0,2\pi)$ independent of latitude $\theta = \arcsin(2U-1), U \sim U(0,1)$.
 
 # Rotationally Symmetric Distributions
-***
+
 ## Comparison of Projected Normal and Langevin Distributions
-***
+
 One way that we might compare the $\mbox{L}(\mu, \kappa)$ and $\mbox{PN}(\gamma\mu, I)$ distributions by choosing $\kappa$ and $\gamma$ to give the same mean resultant lengths and comparing the densities of the cosine of the angle $\theta$ between $U$ and $\mu$.
 
 Of course matching mean resultant lengths is not necessarily the best way to compare these families of distributions.
 
 ## $d=2$
-***
+
 ![](https://github.com/presnell/DirectionalDataSlides/blob/master/Plots/PNvLvMF2.png?raw=true)
 
 ## $d=3$
-***
+
 ![](https://github.com/presnell/DirectionalDataSlides/blob/master/Plots/PNvLvMF3.png?raw=true)
 
 ## $d=4$
-***
+
 ![](https://github.com/presnell/DirectionalDataSlides/blob/master/Plots/PNvLvMF4.png?raw=true)
 
